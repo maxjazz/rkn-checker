@@ -43,6 +43,7 @@ except AttributeError:
 from zapretinfo import ZapretInfo
 
 
+
 def sec2hr(sec):
     h = sec//3600
     m = (sec//60)%60
@@ -51,32 +52,32 @@ def sec2hr(sec):
 
 
 class Daemon:
-
+    
     def __init__(self, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', refresh=15):
-        self.pidfile = pidfile
+        self.pidfile = pidfile 
         self.stdin   = stdin
         self.stdout  = stdout
         self.stderr  = stderr
         self.refresh = refresh
         #self.zapretlogger= logging.getLogger("RosKomNadzor")
-
-
+        
+        
     def daemonize(self):
         # first fork()
         try:
             pid = os.fork()
             if pid > 0:
-                sys.exit(0)
+                sys.exit(0) 
         except OSError, e:
             sys.stderr.write ("fork #1 failed: (%d) %s\n" % (e.errno, e.strerror))
             sys.exit(1)
-
+        
         # switch off from parent environment
         os.chdir("/")
         os.umask(0)
         os.setsid()
 
-        # second fork
+        # second fork 
         try:
             pid = os.fork()
             if pid > 0:
@@ -112,58 +113,58 @@ class Daemon:
 	    WebServiceVersion = rkndump.getWebServiceVersion()  # Web-service string "X.Y"
 	    DumpFormatVersion = rkndump.getDumpFormatVersion()  # Dump format version string "X.Y"
 	    DocVersion        = rkndump.getDocVersion()         # Doc version string "X.Y"
-
+	    
 	    localdump 	      = DumpFile(DIR);
 	    LocalDumpDate     = localdump.getUpdateTime()
 	    LocalDumpDateUrgently = localdump.getUpdateTimeUrgently()
-
+	    
 	    deltaDumpDate = DumpDate/1000 - LocalDumpDate
 	    deltaDumpDateUrgently = DumpDateUrgently/1000 - LocalDumpDateUrgently
-
-
-
-	    self.zapretlogger.info("Dump date:\t\t%s [local: %s, deltas: %s ]"
-                                   % (datetime.datetime.fromtimestamp(DumpDate/1000),
-                                      datetime.datetime.fromtimestamp(LocalDumpDate),
+	    
+	    
+	    
+	    self.zapretlogger.info("Dump date:\t\t%s [local: %s, deltas: %s ]" 
+                                   % (datetime.datetime.fromtimestamp(DumpDate/1000), 
+                                      datetime.datetime.fromtimestamp(LocalDumpDate), 
                                       sec2hr(deltaDumpDate) ))
-
-            self.zapretlogger.info("Dump date urgently:\t%s [local: %s, deltas: %s  ]"
-                                   % (datetime.datetime.fromtimestamp(DumpDateUrgently/1000),
-                                      datetime.datetime.fromtimestamp(LocalDumpDateUrgently),
+    	    
+            self.zapretlogger.info("Dump date urgently:\t%s [local: %s, deltas: %s  ]" 
+                                   % (datetime.datetime.fromtimestamp(DumpDateUrgently/1000), 
+                                      datetime.datetime.fromtimestamp(LocalDumpDateUrgently), 
                                       sec2hr(deltaDumpDateUrgently) ))
     	    self.zapretlogger.info("Web Service Version:\t\t%s [local: %s]" % (WebServiceVersion, localdump.getWebServiceVersion()))
     	    self.zapretlogger.info("Dump Format Version:\t\t%s [local: %s]" % (DumpFormatVersion, localdump.getDumpFormatVersion()))
     	    self.zapretlogger.info("Operator's Doc Version:\t%s [local: %s]" % (DocVersion, localdump.getDocVersion()) )
-
+    	    
     	    if (deltaDumpDateUrgently <> 0):
     		self.zapretlogger.info("Need urgently update")
     		os.system("/home/cmd4jazz/roskomnadzor/download.sh")
-
+    	    
     	    if (deltaDumpDate >= 24*60*60 ):
     		self.zapretlogger.info("Need daily update")
     		os.system("/home/cmd4jazz/roskomnadzor/download.sh")
-
-
+    	    
+    	    
     	    if (WebServiceVersion > localdump.getWebServiceVersion()):
     		self.zapretlogger.info("New Version of Web Service")
     		localdump.setWebServiceVersion(WebServiceVersion)
-
+    		
     	    if (DumpFormatVersion > localdump.getDumpFormatVersion()):
     		self.zapretlogger.info("New Version of Dump Format")
     		localdump.setDumpFormatVersion(DumpFormatVersion)
-
-
+    	
+    	    
     	    if (DocVersion > localdump.getDocVersion()):
-    		self.zapretlogger.info("New Version of Operator's Doc Version")
-    		localdump.setDocVersion(DocVersion)
+    		self.zapretlogger.info("New Version of Operator's Doc Version")	
+    		localdump.setDocVersion(DocVersion) 
     		os.system("wget -c http://vigruzki.rkn.gov.ru/docs/description_for_operators_actual.pdf -O /home/cmd4jazz/roskomnadzor/dump/doc-"+DocVersion+".pdf"
                           " -o /home/cmd4jazz/roskomnadzor/dump/doc-"+DocVersion+".log")
                 message = "New documentation for RosKomNadzor Servise is available ( version "+DocVersion+")\nHave fun!\n---\nrkn-support";
                 mailnotify.sendemail ("New version of RKN service", message, "/home/cmd4jazz/roskomnadzor/dump/doc-"+DocVersion+".pdf")
 
-
+    	    
     	    time.sleep (self.refresh*60)
-
+            
             self.zapretlogger.info ("="*100)
 
     def start(self):
@@ -175,3 +176,6 @@ class Daemon:
         self.zapretlogger.info("="*100 )
 
         self.run()
+
+     
+            
