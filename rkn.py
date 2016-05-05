@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-
-
+import sys
+sys.path.append("settings")
 import logging
 import settings
 from daemon import Daemon
@@ -17,5 +17,3 @@ logging.basicConfig(level=logging.INFO,
 
 rkn = Daemon(settings.RKN_PID)
 rkn.start()
-
-
