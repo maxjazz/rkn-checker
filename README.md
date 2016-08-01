@@ -6,3 +6,4 @@
 
 Using 'suds' module
 https://pypi.python.org/pypi/suds
+sudo easy_install -z suds

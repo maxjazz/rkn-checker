@@ -5,5 +5,5 @@ OPERATOR_EMAIL = "mail@operator.ru"
 
 WORK_DIR = "/home/cmd4jazz/roskomnadzor/"
 
-RKN_PID="/var/log/rkn.pid"
-RKN_LOG="/var/log/rkn.message"
+RKN_PID="rkn.pid"
+RKN_LOG="rkn.message"
