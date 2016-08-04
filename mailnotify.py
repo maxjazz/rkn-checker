@@ -15,9 +15,6 @@ from email.mime.text import MIMEText
 
 
 def sendemail (subj, message, files=None):
-    from_email = 'maxim@letus.ru'
-    to_email = 'sute@letus.ru'
-    mypass = 'mobile2'
 
     msg = MIMEMultipart()
     msg['From'] = 'rkn-support@letus.ru'
