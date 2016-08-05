@@ -37,6 +37,7 @@ class ZapretInfo:
         return result
 
     def sendRequest(self,requestFile,signatureFile,docVersion):
+        # type: (object, object, object) -> object
         file = open(requestFile, "rb")
         data = file.read()
         file.close()

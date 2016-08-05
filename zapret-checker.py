@@ -18,6 +18,8 @@ from lxml import etree as ET
 import settings
 import mailnotify
 
+
+
 try:
     OPERATOR_NAME  = settings.OPERATOR_NAME
     OPERATOR_INN   = settings.OPERATOR_INN
