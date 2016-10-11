@@ -4,6 +4,8 @@
  -
  -http://vigruzki.rkn.gov.ru
 
-Using 'suds' module
-https://pypi.python.org/pypi/suds
-sudo easy_install -z suds
+Use 'suds', 'pytz' and 'lxml' modules
+
+$ wget pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg
+$ sudo sh setuptools-0.6c11-py2.7.egg
+$ sudo easy_install -z suds pytz lxml

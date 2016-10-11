@@ -1,9 +1,29 @@
+from xml.etree.ElementTree import ElementTree
+from datetime import datetime,timedelta
+from zapretinfo import ZapretInfo
+import time
+import zipfile
+import pytz
+import os
+import shutil
+from base64 import b64decode
+from lxml import etree as ET
+import logging
+import mailnotify
+from zapretinfo import ZapretInfo
+
+
+import settings
+
+
+
 class RknChecker:
+    # TODO Create
     def init(self):
         self.OPERATOR_NAME = settings.OPERATOR_NAME
         self.OPERATOR_INN  = settings.OPERATOR_INN
         self.OPERATOR_OGRN = settings.OPERATOR_OGRN
-        self.OPERATOR_EMAL = settings.OPERATOR_EMAIL
+        self.OPERATOR_EMAIL = settings.OPERATOR_EMAIL
 
         try:
             self.DIR = settings.DIR
@@ -13,6 +33,7 @@ class RknChecker:
 
         self.XML_FILE_NAME = self.DIR+"request.xml"
         self.P7S_FILE_NAME = self.DIR+"request.xml.sign"
+        self.DOC_VERSION   = settings.DOC_VERSION
 
     def getDumpDate(self):
         ts = ElementTree().parse(self.DIR + "dump.xml").attrib['updateTime']
@@ -50,5 +71,7 @@ class RknChecker:
             "/openssl-gost/bin/openssl smime -sign -in " + self.XML_FILE_NAME + " -out " + self.P7S_FILE_NAME + " -signer keys/letus.pem -outform DER");
 
     def sendRequest(self):
+        opener = ZapretInfo()
+        request = opener.sendRequest(self.XML_FILE_NAME, self.P7S_FILE_NAME, self.DOC_VERSION)
 
 
