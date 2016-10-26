@@ -105,12 +105,17 @@ function remove
 	echo;
 }
 
+function version
+{
+    $DIRECTORY/bin/openssl version
+}
 
 
 case $1 in 
 backup) backup;;
 install) install;;
 remove) remove;;
+version) version;;
 update_conf) update_conf;;
 esac
 
