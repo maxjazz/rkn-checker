@@ -170,11 +170,10 @@ class Daemon:
     def start(self):
         self.daemonize()
         self.zapretlogger= logging.getLogger("rkn-%s" % str(os.getpid()))
-	self.zapretlogger.info("="*100 )
-	self.zapretlogger.info("                      Starting daemon with pid: %s", str(os.getpid()) )
-	self.zapretlogger.info("                      Working directory: %s", str(os.getcwd()) )
         self.zapretlogger.info("="*100 )
-
+        self.zapretlogger.info("                      Starting daemon with pid: %s", str(os.getpid()) )
+        self.zapretlogger.info("                      Working directory: %s", str(os.getcwd()) )
+        self.zapretlogger.info("="*100 )
         self.run()
 
      
