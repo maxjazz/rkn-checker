@@ -8,4 +8,4 @@ __version__   = "0.1"
 from request import RequestXML
 
 rq_XML = RequestXML("OPERATOR", "12", "12", "12");
-print (rq_XML.generateText)
+rq_XML.generate("request.xml")
