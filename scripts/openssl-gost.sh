@@ -110,6 +110,11 @@ function version
     $DIRECTORY/bin/openssl version
 }
 
+function show_help
+{
+    echo "Usage: $0 [backup] [install] [remove] [version] [update_cong]"
+}
+
 
 case $1 in 
 backup) backup;;
@@ -117,5 +122,6 @@ install) install;;
 remove) remove;;
 version) version;;
 update_conf) update_conf;;
+*) show_help;;
 esac
 
