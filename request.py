@@ -6,6 +6,8 @@ __version__   = "0.1"
 
 
 from lxml import etree as ET
+from datetime import datetime,timedelta
+import pytz
 
 
 
@@ -23,7 +25,7 @@ class RequestXML:
 
 
 	def generateText(self):
-		request = ET.element('request');
+		request = ET.Element('request');
 
 		requestTime = ET.SubElement(request, 'requestTime');
 		requestTime.text = datetime.now(pytz.utc).isoformat();
@@ -40,12 +42,12 @@ class RequestXML:
 		requestOperatorEmail = ET.SubElement(request, 'email');
 		requestOperatorEmail.text = self.OperatorEmail;
 
-		requestText = ET.tostring(request, encoding="windows-1251", pretty_print=TRUE, xml_declaration=TRUE).replace("'",'"').replace('\n','\r\n');
+		requestText = ET.tostring(request, encoding="windows-1251", pretty_print=True, xml_declaration=True).replace("'",'"').replace('\n','\r\n');
 
 		return requestText;
 
 	def generate(self):
-		text = self.generateText;
+		text = self.generateText();
 		requestFile = open(self.filename, "w");
 		requestFile.write(text);
 		requestFile.close();

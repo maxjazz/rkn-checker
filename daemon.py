@@ -142,6 +142,8 @@ class Daemon:
     	    
     	    if (deltaDumpDate >= 24*60*60 ):
     		self.zapretlogger.info("Need daily update")
+
+            
     		os.system("/home/cmd4jazz/roskomnadzor/download.sh")
     	    
     	    
