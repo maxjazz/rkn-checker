@@ -16,18 +16,19 @@ class RequestXML:
 		self.OperatorINN   = OperatorINN;
 		self.OperatorOGRN  = OperatorOGRN;
 		self.OperatorEmail = OperatorEmail;
+		self.filename = "request.xml";
 
-	def sign:
+	def sign(self):
 		pass
 
 
-	def generateText:
+	def generateText(self):
 		request = ET.element('request');
 
-		requestTime      = ET.SubElement(request, 'requestTime');
+		requestTime = ET.SubElement(request, 'requestTime');
 		requestTime.text = datetime.now(pytz.utc).isoformat();
 
-		requestOperatorName = ET.SubElement(request, 'OperatorName');
+		requestOperatorName      = ET.SubElement(request, 'OperatorName');
 		requestOperatorName.text = self.OperatorName;
 
 		requestOperatorINN = ET.SubElement(request, 'inn');
@@ -43,12 +44,8 @@ class RequestXML:
 
 		return requestText;
 
-	def generate:
+	def generate(self):
 		text = self.generateText;
 		requestFile = open(self.filename, "w");
 		requestFile.write(text);
 		requestFile.close();
-
-
-
-
