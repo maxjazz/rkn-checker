@@ -13,11 +13,12 @@ import pytz
 
 class RequestXML:
 
-	def __init__(self, OperatorName, OperatorINN, OperatorOGRN, OperatorEmail):
+	def __init__(self, OperatorName, OperatorINN, OperatorOGRN, OperatorEmail, TimeZone="UTC"):
 		self.OperatorName  = OperatorName;
 		self.OperatorINN   = OperatorINN;
 		self.OperatorOGRN  = OperatorOGRN;
 		self.OperatorEmail = OperatorEmail;
+		self.TimeZone = TimeZone;
 
 	def sign(self):
 		pass
@@ -27,7 +28,7 @@ class RequestXML:
 		request = ET.Element('request');
 
 		requestTime = ET.SubElement(request, 'requestTime');
-		requestTime.text = datetime.now(pytz.timezone('Europe/Moscow')).isoformat();
+		requestTime.text = datetime.now(pytz.timezone(self.TimeZone)).isoformat();
 
 		requestOperatorName      = ET.SubElement(request, 'OperatorName');
 		requestOperatorName.text = self.OperatorName;

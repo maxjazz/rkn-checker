@@ -7,5 +7,5 @@ __version__   = "0.1"
 
 from request import RequestXML
 
-rq_XML = RequestXML("OPERATOR", "12", "12", "12");
+rq_XML = RequestXML("OPERATOR", "12", "12", "12", "Europe/Moscow");
 rq_XML.generate("request.xml")
