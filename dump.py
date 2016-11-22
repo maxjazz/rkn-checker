@@ -22,9 +22,14 @@ class DumpFile:
 
     def __init__(self, dir):
 	self.dir=dir;
-	DumpFile=ElementTree().parse(self.dir+"dump.xml")
-	self.updateTime = DumpFile.attrib['updateTime']
-	self.updateTimeUrgently = DumpFile.attrib['updateTimeUrgently']
+    try:
+        DumpFile=ElementTree().parse(self.dir+"/dump.xml")
+    except:
+        print ("help")
+        ;
+    else:
+        self.updateTime = DumpFile.attrib['updateTime']
+        self.updateTimeUrgently = DumpFile.attrib['updateTimeUrgently']
 
 
     def getUpdateTime(self):
@@ -67,7 +72,7 @@ class DumpFile:
         else:
             return '0'
 
-    
+
 #############################################################################################
 
     def setDocVersion(self, docversion):
@@ -75,7 +80,7 @@ class DumpFile:
 	doc=open(docPath,'w')
 	doc.write(docversion)
 	doc.close
-    
+
     def getDocVersion(self):
 	docPath=self.dir+'dump/doc'
 	if (os.path.isfile(docPath)):
@@ -92,8 +97,3 @@ class DumpFile:
 #    fromFile=int(time.mktime(dt.timetuple()))+3
 #except:
 #    fromFile=0
-
-
-
-
-

@@ -2,8 +2,9 @@ OPERATOR_NAME = "OPERATOR"
 OPERATOR_INN = "12345678910"
 OPERATOR_OGRN = "12345678910"
 OPERATOR_EMAIL = "mail@operator.ru"
+OPERATOR_TIMEZONE = "Europe/Moscow"
 
-WORK_DIR = "/home/cmd4jazz/roskomnadzor/"
+WORK_DIR = "."
 
-RKN_PID="rkn.pid"
+RKN_PID="/rkn.pid"
 RKN_LOG="rkn.message"
