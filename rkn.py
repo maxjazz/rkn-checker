@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import sys
 import logging
-import psutil
+import os
+import re
+
+#import psutil
 
 sys.path.append("settings")
 import settings
@@ -20,15 +23,15 @@ logging.basicConfig(level=logging.DEBUG,
                     filemode='a')
 
 # 1. Проверка наличия всех зависимостей
-# 2. Проверка запущенного rknDaemon()
 
+
+# 2. Проверка запущенного rknDaemon()
 f = open(settings.RKN_PID, 'r')
 pid = f.read();
-print (pid);
 
-for proc in psutil.process_iter():
-    if proc.name() =="python":
-        print (proc.pid)
-    else:
-        rkn = rknDaemon(settings.RKN_PID)
-        rkn.start()
+if os.path.exists('/proc/'+pid+'/stat'):
+    print('exist')
+else:
+    rkn = rknDaemon(settings.RKN_PID)
+    rkn.start()
+

@@ -100,7 +100,7 @@ class rknDaemon:
 
         # write pidfile
         pid = str(os.getpid())
-        open(self.pidfile, "w+").write("%s\n" % pid)
+        open(self.pidfile, "w+").write("%s" % pid)
         self.rknlog.debug("======== Daemonize succes =========")
 
     def run(self):
