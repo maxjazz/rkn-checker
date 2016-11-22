@@ -34,7 +34,3 @@ if os.path.exists('/proc/'+pid+'/stat'):
 else:
     rkn = rknDaemon(settings.RKN_PID)
     rkn.start()
-<<<<<<< HEAD
-=======
-
->>>>>>> 7b0537bfafa143fc2e8d1befc0ba925633878042
