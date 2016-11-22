@@ -24,11 +24,9 @@ logging.basicConfig(level=logging.DEBUG,
 
 f = open(settings.RKN_PID, 'r')
 pid = f.read();
-print (pid);
 
-for proc in psutil.process_iter():
-    if proc.name() =="python":
-        print (proc.pid)
-    else:
-        rkn = rknDaemon(settings.RKN_PID)
-        rkn.start()
+if os.path.exists('/proc/'+pid+'/stat'):
+    print('exist')
+else:
+    rkn = rknDaemon(settings.RKN_PID)
+    rkn.start()
