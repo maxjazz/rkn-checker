@@ -1,27 +1,4 @@
-#!/usr/bin/env python3
 
-"""
-Disk and Execution Monitor (Daemon)
-
-
-References:
-1) Advanced Programming in UNIX Environment: W Richard Stevens
-2) Unix Programming Frequently Asked Questions:
-         http://www.erlenstar.demon.co.uk/unix/faq_toc.html
-
-"""
-
-__author__    = "Maksim Prokopev"
-__copyright__ = "(c) 2015, 2016 Maksim Prokopev"
-__version__   = "0.2"
-
-#Standart Python Library
-import os
-import sys
-import time
-import datetime
-import logging
-#import mailnotify
 
 from xml.etree.ElementTree import ElementTree
 
