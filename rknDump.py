@@ -7,18 +7,8 @@ from xml.etree.ElementTree import ElementTree
 
 import settings
 
-try:
-    DIR = settings.DIR
-except AttributeError:
-    DIR = os.getcwd()
-    print ("Directory is not defined. Setting to "+DIR)
 
-
-
-
-
-
-class DumpFile:
+class rknDump:
 
     def __init__(self, dir):
 	self.dir=dir;
