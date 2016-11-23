@@ -17,7 +17,7 @@ import settings
 
 
 
-class RknChecker:
+class rknChecker:
     # TODO Create
     def __init__(self):
         self.OPERATOR_NAME = settings.OPERATOR_NAME
@@ -73,6 +73,3 @@ class RknChecker:
     def sendRequest(self):
         opener = ZapretInfo()
         request = opener.sendRequest(self.XML_FILE_NAME, self.P7S_FILE_NAME, self.DOC_VERSION)
-
-
-rkn = RknChecker()

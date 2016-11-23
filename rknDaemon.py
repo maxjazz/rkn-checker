@@ -1,6 +1,7 @@
 
 
 from xml.etree.ElementTree import ElementTree
+from rknChecker import rknChecker
 
 
 #from zapretinfo import ZapretInfo
@@ -81,6 +82,7 @@ class rknDaemon:
         self.rknlog.debug("======== Daemonize succes =========")
 
     def run(self):
+        checker = rknChecker()
         while True:
             #rkndump           = ZapretInfo()
             #DumpDate          = rkndump.getLastDumpDate() 	# Dump timestamp in msec
