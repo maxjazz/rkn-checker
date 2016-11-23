@@ -1,17 +1,13 @@
 from xml.etree.ElementTree import ElementTree
 from datetime import datetime,timedelta
-from zapretinfo import ZapretInfo
 import time
 import zipfile
-import pytz
 import os
 import shutil
 from base64 import b64decode
-from lxml import etree as ET
+#from lxml import etree as ET
 import logging
-import mailnotify
-from zapretinfo import ZapretInfo
-
+#import mailnotify
 
 import settings
 
@@ -20,10 +16,16 @@ import settings
 class rknChecker:
     # TODO Create
     def __init__(self):
+        logging.debug("Initialization instance of rknChecker")
         self.OPERATOR_NAME = settings.OPERATOR_NAME
+        logging.debug("Operator name is: %s", self.OPERATOR_NAME)
         self.OPERATOR_INN  = settings.OPERATOR_INN
+        logging.debug("Operator INN is: %s", self.OPERATOR_INN)
         self.OPERATOR_OGRN = settings.OPERATOR_OGRN
+        logging.debug("Operator OGRN is: %s", self.OPERATOR_OGRN)
         self.OPERATOR_EMAIL = settings.OPERATOR_EMAIL
+        logging.debug("Operator email is: %s", self.OPERATOR_EMAIL)
+        
 
         try:
             self.DIR = settings.DIR

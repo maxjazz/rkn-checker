@@ -15,3 +15,4 @@ RKN_LOG="rkn.message"
 
 # Settings for RKN services
 URL_API="http://vigruzki.rkn.gov.ru/services/OperatorRequest/?wsdl"
+DOC_VERSION = "2.1"
