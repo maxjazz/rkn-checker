@@ -30,7 +30,7 @@ f = open(settings.RKN_PID, 'r')
 pid = f.read();
 
 if os.path.exists('/proc/'+pid+'/stat'):
-    print('exist')
+    logging.debug ("RknDaemon is running now");
 else:
     rkn = rknDaemon(settings.RKN_PID)
     rkn.start()
