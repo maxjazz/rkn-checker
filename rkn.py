@@ -22,15 +22,17 @@ logging.basicConfig(level=logging.DEBUG,
                     filename=settings.RKN_LOG,
                     filemode='a')
 
-# 1. Проверка наличия всех зависимостей
+if __name__ == "__main__":
 
-
-# 2. Проверка запущенного rknDaemon()
-f = open(settings.RKN_PID, 'r')
-pid = f.read();
-
-if os.path.exists('/proc/'+pid+'/stat'):
-    logging.debug ("RknDaemon is running now");
-else:
-    rkn = rknDaemon(settings.RKN_PID)
-    rkn.start()
+    # 1. Проверка наличия всех зависимостей
+    # 2. Проверка запущенного rknDaemon()
+    f = open(settings.RKN_PID, 'r')
+    pid = f.read();
+    print ('/proc/'+pid);
+    print (os.path.exists('/proc/'+pid));
+    if os.path.exists('/proc/'+pid):
+        logging.debug ("RknDaemon is running now with pid = %s", pid);
+    else:
+        logging.debug ("Process with pid = %s does not exist", pid);
+        rkn = rknDaemon(settings.RKN_PID)
+        rkn.start()

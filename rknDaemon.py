@@ -4,17 +4,9 @@ from rknChecker import rknChecker
 #from zapretinfo import ZapretInfo
 #from dump import DumpFile
 
-
 import settings
 import logging
 import os, sys, time
-
-try:
-    DIR = settings.WORK_DIR
-except AttributeError:
-    DIR = os.getcwd()
-    #self.zapretlogger.info("Directory is not defined. Setting to "+DIR)
-
 
 def sec2hr(sec):
     h = sec//3600
