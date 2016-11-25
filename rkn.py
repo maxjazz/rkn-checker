@@ -22,6 +22,13 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt='%Y-%m-%d %H:%M:%S',
                     filename=settings.RKN_LOG,
                     filemode='a')
+def isRunning():
+    if os.path.exists('/proc/'+pid):
+        return True
+    else:
+        return False
+
+
 
 def rknParser():
     parser = argparse.ArgumentParser()
@@ -48,7 +55,7 @@ def rknParser():
 def start():
     f = open(settings.RKN_PID, 'r')
     pid = f.read();
-    if os.path.exists('/proc/'+pid):
+    if isRunning:
         logging.debug ("RknDaemon is running now with pid = %s", pid);
     else:
         logging.debug ("Process with pid = %s does not exist", pid);
