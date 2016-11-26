@@ -63,10 +63,12 @@ def start():
         rkn.start()
 
 def stop():
+    f = open(settings.RKN_PID, 'r');
     print ("Stop")
 
 def reload():
-    print ("Reload")
+    stop()
+    start()
 
 def status():
     print ("Status")
