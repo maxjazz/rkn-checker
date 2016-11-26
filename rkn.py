@@ -25,9 +25,8 @@ logging.basicConfig(level=logging.DEBUG,
                     filemode='a')
 def isRunning(pid):
     if (psutil.Process(int(pid))):
-        print (psutil.Process(int(pid)).status)
-        #if (psutil.Process(int(pid)).status=='running'):
-    #if (0): #os.path.exists('/proc/'+pid):
+    #if (psutil.Process(int(pid)).status=='running'):
+        #if (0): #os.path.exists('/proc/'+pid):
         return True
     else:
         return False
@@ -59,8 +58,8 @@ def rknParser():
 def start():
     f = open(settings.RKN_PID, 'r')
     pid = f.read();
-    if (False): #isRunning(pid):
-        logging.debug ("RknDaemon is running now with pid = %s", pid);
+    if isRunning(pid):
+        logging.debug ("RknDaemon is still running with pid = %s", pid);
     else:
         logging.debug ("Process with pid = %s does not exist", pid);
         rkn = rknDaemon(settings.RKN_PID)
