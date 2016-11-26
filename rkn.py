@@ -2,10 +2,11 @@
 import sys
 import logging
 import os
+import signal
 import re
 import argparse
 
-#import psutil
+import psutil
 
 sys.path.append("settings")
 import settings
@@ -22,8 +23,11 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt='%Y-%m-%d %H:%M:%S',
                     filename=settings.RKN_LOG,
                     filemode='a')
-def isRunning():
-    if os.path.exists('/proc/'+pid):
+def isRunning(pid):
+    if (psutil.Process(int(pid))):
+        print (psutil.Process(int(pid)).status)
+        #if (psutil.Process(int(pid)).status=='running'):
+    #if (0): #os.path.exists('/proc/'+pid):
         return True
     else:
         return False
@@ -55,7 +59,7 @@ def rknParser():
 def start():
     f = open(settings.RKN_PID, 'r')
     pid = f.read();
-    if isRunning:
+    if (False): #isRunning(pid):
         logging.debug ("RknDaemon is running now with pid = %s", pid);
     else:
         logging.debug ("Process with pid = %s does not exist", pid);
@@ -64,7 +68,11 @@ def start():
 
 def stop():
     f = open(settings.RKN_PID, 'r');
-    print ("Stop")
+    pid = f.read()
+    try:
+        os.kill(int(pid), signal.SIGKILL)
+    except Exception as e:
+        os.remove(settings.RKN_PID)
 
 def reload():
     stop()
