@@ -5,8 +5,9 @@ import zipfile
 import os
 import shutil
 from base64 import b64decode
-#from lxml import etree as ET
+from lxml import etree as ET
 import logging
+import pytz
 #import mailnotify
 
 import settings
@@ -66,11 +67,10 @@ class rknChecker:
         email = ET.SubElement(request, 'email')
         email.text = self.OPERATOR_EMAIL
         tree = ET.ElementTree(request)
-        # tree.write(XML_FILE_NAME, encoding="windows-1251", pretty_print=True, xml_declaration=True)
-        requestText = ET.tostring(request, encoding="windows-1251", pretty_print=True, xml_declaration=True).replace(
-            "'", '"')
+        #tree.write(self.XML_FILE_NAME, encoding="windows-1251", pretty_print=True, xml_declaration=True)
+        requestText = ET.tostring(request, encoding="windows-1251", pretty_print=True, xml_declaration=True)
         requestFile = open(self.XML_FILE_NAME, "w")
-        requestText = requestText.replace('\n', '\r\n')
+        requestText = str(requestText).replace('\n', '\r\n')
         requestFile.write(requestText)
         requestFile.close()
 

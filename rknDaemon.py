@@ -75,7 +75,8 @@ class rknDaemon:
 
     def run(self):
         checker = rknChecker()
-        checker.getDumpDate()
+        logging.info ("Last dump have a time: %s", checker.getDumpDate());
+        checker.generateRequestXML();
         while True:
             #rkndump           = ZapretInfo()
             #DumpDate          = rkndump.getLastDumpDate() 	# Dump timestamp in msec
