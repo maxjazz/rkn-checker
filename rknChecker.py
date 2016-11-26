@@ -25,7 +25,7 @@ class rknChecker:
         logging.debug("Operator OGRN is: %s", self.OPERATOR_OGRN)
         self.OPERATOR_EMAIL = settings.OPERATOR_EMAIL
         logging.debug("Operator email is: %s", self.OPERATOR_EMAIL)
-        
+
 
         try:
             self.DIR = settings.DIR
@@ -38,10 +38,16 @@ class rknChecker:
         self.DOC_VERSION   = settings.DOC_VERSION
 
     def getDumpDate(self):
-        ts = ElementTree().parse(self.DIR + "dump.xml").attrib['updateTime']
-        dt = datetime.strptime(ts[:19], '%Y-%m-%dT%H:%M:%S')
-        self.DumpDate = int(time.mktime(dt.timetuple())) + 3
-        return self.DumpDate
+        try:
+            et = ElementTree().parse(self.DIR + "dump.xml")
+        except IOError:
+            logging.debug("Can't find dump.xml");
+            return '1970-01-01T00:00:00'
+        else:
+            ts = et.attrib['updateTime']
+            dt = datetime.strptime(ts[:19], '%Y-%m-%dT%H:%M:%S')
+            self.DumpDate = int(time.mktime(dt.timetuple())) + 3
+            return self.DumpDate
 
     def getRknDate(self):
         self.RknDate = ZapretInfo().getLastDumpDate()

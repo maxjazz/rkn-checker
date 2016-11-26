@@ -14,10 +14,6 @@ import settings
 from rknDaemon import rknDaemon
 
 
-
-
-
-
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
@@ -58,7 +54,7 @@ def rknParser():
 def start():
     f = open(settings.RKN_PID, 'r')
     pid = f.read();
-    if isRunning(pid):
+    if False: #isRunning(pid):
         logging.debug ("RknDaemon is still running with pid = %s", pid);
     else:
         logging.debug ("Process with pid = %s does not exist", pid);
