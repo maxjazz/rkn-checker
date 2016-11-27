@@ -8,10 +8,11 @@ __version__   = "0.1"
 from lxml import etree as ET
 from datetime import datetime,timedelta
 import pytz
+import lxml
+import logging
 
 
-
-class RequestXML:
+class rknRequestXML:
 
 	def __init__(self, OperatorName, OperatorINN, OperatorOGRN, OperatorEmail, TimeZone="UTC"):
 		self.OperatorName  = OperatorName;
@@ -42,9 +43,11 @@ class RequestXML:
 		requestOperatorEmail = ET.SubElement(request, 'email');
 		requestOperatorEmail.text = self.OperatorEmail;
 
-		requestText = ET.tostring(request, encoding="windows-1251", pretty_print=True, xml_declaration=True).replace("'",'"').replace('\n','\r\n');
+		requestText = lxml.etree.tostring(request, encoding='windows-1251', pretty_print=True, xml_declaration=True)
+		#, encoding="windows-1251", pretty_print=True, xml_declaration=True).replace("'",'"').replace('\n','\r\n');
+		logging.debug(requestText)
 
-		return requestText;
+		return str(requestText, 'windows-1251');
 
 	def generate(self, filename):
 		text = self.generateText();
