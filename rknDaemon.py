@@ -24,7 +24,7 @@ class rknDaemon:
         self.stdout  = stdout
         self.stderr  = stderr
         self.refresh = refresh
-        self.rknlog= logging.getLogger("rkn" % str(os.getpid))
+        self.rknlog= logging.getLogger("rkn" )
 
 
 
