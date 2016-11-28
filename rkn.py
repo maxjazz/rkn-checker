@@ -56,6 +56,8 @@ def start():
         f = open(settings.WORK_DIR+settings.RKN_PID, 'r')
     except Exception as e:
         logging.debug ("Error while open file: %s", e)
+        rkn = rknDaemon(settings.RKN_PID)
+        rkn.start()
     else:
         pid = f.read();
         if False: #isRunning(pid):
