@@ -62,8 +62,14 @@ def start():
         rkn.start()
 
 def stop():
-    f = open(settings.RKN_PID, 'r');
-    pid = f.read()
+    try:
+        f = open(settings.RKN_PID, 'r');
+    except Exception as e:
+        logging.debug("Can't find pid file. Nothing to stop.");
+        return 1;
+    else:
+        pid = f.read()
+        
     try:
         os.kill(int(pid), signal.SIGKILL)
     except Exception as e:
