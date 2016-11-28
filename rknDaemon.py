@@ -24,7 +24,7 @@ class rknDaemon:
         self.stdout  = stdout
         self.stderr  = stderr
         self.refresh = refresh
-        self.rknlog= logging.getLogger("rkn-%s" % str(os.getpid()))
+
 
 
 
@@ -73,12 +73,13 @@ class rknDaemon:
         pid = str(os.getpid())
         open(self.pidfile, "w+").write("%s" % pid)
         self.rknlog.debug("======== Daemonize succes =========")
+        self.rknlog= logging.getLogger("rkn-%s" % str(os.getpid()))
 
     def run(self):
         checker = rknChecker()
         logging.info ("Last dump have a time: %s", checker.getDumpDate());
         request = rknRequestXML(checker.OPERATOR_NAME, checker.OPERATOR_INN, checker.OPERATOR_OGRN, checker.OPERATOR_EMAIL, 'Europe/Moscow' )
-        request.generate('request.xml');
+        request.generate('./request.xml');
         while True:
             #rkndump           = ZapretInfo()
             #DumpDate          = rkndump.getLastDumpDate() 	# Dump timestamp in msec
