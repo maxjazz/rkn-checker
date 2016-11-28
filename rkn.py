@@ -52,14 +52,18 @@ def rknParser():
     return parser
 
 def start():
-    f = open(settings.RKN_PID, 'r')
-    pid = f.read();
-    if False: #isRunning(pid):
-        logging.debug ("RknDaemon is still running with pid = %s", pid);
+    try:
+        f = open(settings.WORK_DIR+settings.RKN_PID, 'r')
+    except Exception as e:
+        logging.debug ("Error while open file: %s", e)
     else:
-        logging.debug ("Process with pid = %s does not exist", pid);
-        rkn = rknDaemon(settings.RKN_PID)
-        rkn.start()
+        pid = f.read();
+        if False: #isRunning(pid):
+            logging.debug ("RknDaemon is still running with pid = %s", pid);
+        else:
+            logging.debug ("Process with pid = %s does not exist", pid);
+            rkn = rknDaemon(settings.RKN_PID)
+            rkn.start()
 
 def stop():
     try:
@@ -69,7 +73,7 @@ def stop():
         return 1;
     else:
         pid = f.read()
-        
+
     try:
         os.kill(int(pid), signal.SIGKILL)
     except Exception as e:

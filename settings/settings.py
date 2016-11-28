@@ -8,7 +8,7 @@ OPERATOR_TIMEZONE = "Europe/Moscow"
 
 
 # Log file and rkn.pid directory
-WORK_DIR = "/var/log/rkn"
+WORK_DIR = "/var/log/rkn/"
 RKN_PID="rkn.pid"
 RKN_LOG="rkn.message"
 
