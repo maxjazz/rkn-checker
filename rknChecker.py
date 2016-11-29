@@ -29,11 +29,11 @@ class rknChecker:
 
 
         try:
-            self.DIR = settings.DIR
+            self.DIR = settings.WORK_DIR
         except AttributeError:
             # Logging about setting dir to current
             self.DIR = os.getcwd()
-
+        logging.debug ("Path for request.xml is: %s", self.DIR);
         self.XML_FILE_NAME = self.DIR+"request.xml"
         self.P7S_FILE_NAME = self.DIR+"request.xml.sign"
         self.DOC_VERSION   = settings.DOC_VERSION

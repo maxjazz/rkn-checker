@@ -64,7 +64,7 @@ def start():
             logging.debug ("RknDaemon is still running with pid = %s", pid);
         else:
             logging.debug ("Process with pid = %s does not exist", pid);
-            rkn = rknDaemon(settings.RKN_PID)
+            rkn = rknDaemon(settings.WORK_DIR+settings.RKN_PID)
             rkn.start()
 
 def stop():
@@ -80,15 +80,25 @@ def stop():
         os.kill(int(pid), signal.SIGKILL)
     except Exception as e:
         os.remove(settings.WORK_DIR+settings.RKN_PID)
+    else:
+        os.remove(settings.WORK_DIR+settings.RKN_PID)
 
 def restart():
     stop()
     start()
 
 def status():
-    f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
-    pid = f.read()
-    print (str(psutil.Process(pid).status))
+    try:
+        f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
+    except Exception as e:
+        logging.debug("Can't find pid file. Nothing to stop.");
+        print ("Daemon status: not running");
+        return 1;
+    else:
+        pid = f.read()
+        status = str(psutil.Process(int(pid)).status())
+
+        print ("Daemon status:", status)
 
 if __name__ == "__main__":
 

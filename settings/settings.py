@@ -8,7 +8,8 @@ OPERATOR_TIMEZONE = "Europe/Moscow"
 
 
 # Log file and rkn.pid directory
-WORK_DIR = "/var/log/rkn/"
+# TODO: remove absolute path
+WORK_DIR = "/Users/maxjazz/Documents/labs/rkn-checker/log/"
 RKN_PID="rkn.pid"
 RKN_LOG="rkn.message"
 
