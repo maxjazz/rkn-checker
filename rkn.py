@@ -86,8 +86,9 @@ def reload():
     start()
 
 def status():
-    print ("Status")
-
+    f = open(settings.RKN_PID, 'r');
+    pid = f.read()
+    print (psutil.Process(pid).status)
 
 if __name__ == "__main__":
 
