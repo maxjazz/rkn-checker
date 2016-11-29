@@ -41,9 +41,9 @@ def rknParser():
     stop_parser = subparser.add_parser('stop', help='Stop daemon')
     stop_parser.set_defaults(func = stop)
 
-    # Reload RKN
-    reload_parser = subparser.add_parser('reload', help='reload daemon')
-    reload_parser.set_defaults(func = reload)
+    # Restart RKN
+    reload_parser = subparser.add_parser('restart', help='restart daemon')
+    reload_parser.set_defaults(func = restart)
 
     # Show status of RKN
     status_parser = subparser.add_parser('status', help='Show status')
@@ -81,14 +81,14 @@ def stop():
     except Exception as e:
         os.remove(settings.WORK_DIR+settings.RKN_PID)
 
-def reload():
+def restart():
     stop()
     start()
 
 def status():
     f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
     pid = f.read()
-    print (psutil.Process(pid).status)
+    print (str(psutil.Process(pid).status))
 
 if __name__ == "__main__":
 
