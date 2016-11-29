@@ -69,7 +69,7 @@ def start():
 
 def stop():
     try:
-        f = open(settings.RKN_PID, 'r');
+        f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
     except Exception as e:
         logging.debug("Can't find pid file. Nothing to stop.");
         return 1;
@@ -86,7 +86,7 @@ def reload():
     start()
 
 def status():
-    f = open(settings.RKN_PID, 'r');
+    f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
     pid = f.read()
     print (psutil.Process(pid).status)
 
