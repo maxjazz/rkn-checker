@@ -56,7 +56,7 @@ def start():
         f = open(settings.WORK_DIR+settings.RKN_PID, 'r')
     except Exception as e:
         logging.debug ("Error while open file: %s", e)
-        rkn = rknDaemon(settings.RKN_PID)
+        rkn = rknDaemon(settings.WORK_DIR+settings.RKN_PID)
         rkn.start()
     else:
         pid = f.read();
@@ -79,7 +79,7 @@ def stop():
     try:
         os.kill(int(pid), signal.SIGKILL)
     except Exception as e:
-        os.remove(settings.RKN_PID)
+        os.remove(settings.WORK_DIR+settings.RKN_PID)
 
 def reload():
     stop()
