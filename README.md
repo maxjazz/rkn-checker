@@ -2,10 +2,6 @@
  -
  -Автоматизация процесса выгрузки информации о доменных именах, указателей страниц сайтов в сети Интернет, а также сетевых адресов, позволяющих идентифицировать сайт или информацию, распространение которой осуществляется без согласия правообладателя или иного законного основания либо распространение которой запрещено на территории Российской Федерации, в автоматическом режиме.
  -
- -http://vigruzki.rkn.gov.ru
+ -http://vigruzki.rkn.gov.ru </br>
 
-Use 'suds', 'pytz' and 'lxml' modules
-
-$ wget pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg
-$ sudo sh setuptools-0.6c11-py2.7.egg
-$ sudo easy_install -z suds pytz lxml
+Depends from:  suds, pytz, lxml
