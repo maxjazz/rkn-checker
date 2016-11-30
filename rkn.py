@@ -7,16 +7,34 @@ import re
 import argparse
 import psutil
 
-WORK_DIR = "/var/"
-RKN_LOG  = "rkn-messages.log"
-RKN_PID  = "rkn.pid"
+
+SETTINGS = {
+    'WORK_DIR' : '/var/',
+    'RKN_LOG'  : 'rkn-message.log',
+    'RKN_PID'  : 'rkn.pid',
+    'OPERATOR_NAME' : "OPERATOR",
+    'OPERATOR_INN'  : "12345678910",
+    'OPERATOR_OGRN' : "12345678910",
+    'OPERATOR_EMAIL' : "mail@operator.ru",
+    'OPERATOR_TIMEZONE' : "UTC",
+    'URL_API'           : 'http://vigruzki.rkn.gov.ru/services/OperatorRequest/?wsdl',
+    'DOC_VERSION'       : '2.1'
+}
+
 
 def init (filename):
     loggihg.debug ('Load settings from file: %s', filename)
     sys.path.append("settings")
     import filename
-    WORK_DIR = settings.WORK_DIR
-    RKN_LOG  = settings.RKN_LOG
+    SETTINGS['WORK_DIR'] = settings.WORK_DIR
+    SETTINGS['RKN_PID']  = settings.RKN_PID
+    SETTINGS['RKN_LOG']  = settings.RKN_LOG
+    SETTINGS['OPERATOR_NAME'] = settings.OPERATOR_NAME
+    SETTINGS['OPERATOR_INN'] = settings.OPERATOR_INN
+    SETTINGS['OPERATOR_EMAIL'] = settings.OPERATOR_EMAIL
+    SETTINGS['OPERATOR_TIMEZONE'] = settings.OPERATOR_TIMEZONE
+    SETTINGS['URL_API'] = settings.URL_API
+    SETTINGS['DOC_VERSION'] = settings.DOC_VERSION
 
 
 
@@ -34,7 +52,7 @@ from rknDaemon import rknDaemon
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename=WORK_DIR+RKN_LOG,
+                    filename=SETTINGS['WORK_DIR']+SETTINGS['RKN_LOG'],
                     filemode='a')
 
 
@@ -75,10 +93,10 @@ def rknParser():
 
 def start():
     try:
-        f = open(settings.WORK_DIR+settings.RKN_PID, 'r')
+        f = open(SETTINGS['WORK_DIR']+SETTINGS['RKN_PID'], 'r')
     except Exception as e:
         logging.debug ("Error while open file: %s", e)
-        rkn = rknDaemon(WORK_DIR,RKN_PID)
+        rkn = rknDaemon(SETTINGS['WORK_DIR'],SETTINGS['RKN_PID']) #TODO передавать полностью массив в качестве параметра
         rkn.start()
     else:
         pid = f.read();
@@ -86,12 +104,12 @@ def start():
             logging.debug ("RknDaemon is still running with pid = %s", pid);
         else:
             logging.debug ("Process with pid = %s does not exist", pid);
-            rkn = rknDaemon(WORK_DIR,RKN_PID)
+            rkn = rknDaemon(SETTINGS['WORK_DIR'],SETTINGS['RKN_PID']) #TODO передавать полностью массив в качестве параметра
             rkn.start()
 
 def stop():
     try:
-        f = open(WORK_DIR+RKN_PID, 'r');
+        f = open(SETTINGS['WORK_DIR']+SETTINGS['RKN_PID'], 'r');
     except Exception as e:
         logging.debug("Can't find pid file. Nothing to stop.");
         return 1;
@@ -101,9 +119,9 @@ def stop():
     try:
         os.kill(int(pid), signal.SIGKILL)
     except Exception as e:
-        os.remove(WORK_DIR+RKN_PID)
+        os.remove(SETTINGS['WORK_DIR']+SETTINGS['RKN_PID'])
     else:
-        os.remove(WORK_DIR+RKN_PID)
+        os.remove(SETTINGS['WORK_DIR']+SETTINGS['RKN_PID'])
 
 def restart():
     stop()
@@ -115,6 +133,7 @@ def status():
     except Exception as e:
         logging.debug("Can't find pid file. Nothing to stop.");
         print ("Daemon status: not running");
+        print ("Settings: ", SETTINGS)
         return 1;
     else:
         pid = f.read()

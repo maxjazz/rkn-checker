@@ -72,7 +72,7 @@ class rknDaemon:
 
         # write pidfile
         pid = str(os.getpid())
-        open(self.pidfile, "w+").write("%s" % pid)
+        open(self.pidfile, "w+").write("%s" % pid) #TODO: PermissionError: [Errno 13] Permission denied: '/var/rkn.pid'
         self.rknlog.debug("======== Daemonize succes =========")
         self.rknlog= logging.getLogger("rkn-%s" % str(os.getpid()))
         self.rknlog.debug ("Pidfile is: %s", self.pidfile);
