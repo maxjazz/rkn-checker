@@ -18,8 +18,9 @@ def sec2hr(sec):
 
 class rknDaemon:
 
-    def __init__(self, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', refresh=15):
-        self.pidfile = pidfile
+    def __init__(self, workdir, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', refresh=15):
+        self.workdir = workdir
+        self.pidfile = workdir+pidfile
         self.stdin   = stdin
         self.stdout  = stdout
         self.stderr  = stderr
@@ -79,7 +80,7 @@ class rknDaemon:
         checker = rknChecker()
         logging.info ("Last dump have a time: %s", checker.getDumpDate());
         request = rknRequestXML(checker.OPERATOR_NAME, checker.OPERATOR_INN, checker.OPERATOR_OGRN, checker.OPERATOR_EMAIL, 'Europe/Moscow' )
-        request.generate(settings.WORK_DIR+'request.xml');
+        request.generate(self.workdir+'request.xml');
         while True:
             #rkndump           = ZapretInfo()
             #DumpDate          = rkndump.getLastDumpDate() 	# Dump timestamp in msec

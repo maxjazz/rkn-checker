@@ -5,20 +5,42 @@ import os
 import signal
 import re
 import argparse
-
 import psutil
 
-sys.path.append("settings")
-import settings
+WORK_DIR = "/var/"
+RKN_LOG  = "rkn-messages.log"
+RKN_PID  = "rkn.pid"
+
+def init (filename):
+    loggihg.debug ('Load settings from file: %s', filename)
+    sys.path.append("settings")
+    import filename
+    WORK_DIR = settings.WORK_DIR
+    RKN_LOG  = settings.RKN_LOG
+
+
+
+if (os.path.exists('settings/settings.py')):
+    init('settings')
+else:
+    logging.debug ('Can not find setting.py. Loading default')
+
+
 
 from rknDaemon import rknDaemon
+
 
 
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename=settings.WORK_DIR+settings.RKN_LOG,
+                    filename=WORK_DIR+RKN_LOG,
                     filemode='a')
+
+
+
+
+
 def isRunning(pid):
     if (psutil.Process(int(pid))):
     #if (psutil.Process(int(pid)).status=='running'):
@@ -56,7 +78,7 @@ def start():
         f = open(settings.WORK_DIR+settings.RKN_PID, 'r')
     except Exception as e:
         logging.debug ("Error while open file: %s", e)
-        rkn = rknDaemon(settings.WORK_DIR+settings.RKN_PID)
+        rkn = rknDaemon(WORK_DIR,RKN_PID)
         rkn.start()
     else:
         pid = f.read();
@@ -64,12 +86,12 @@ def start():
             logging.debug ("RknDaemon is still running with pid = %s", pid);
         else:
             logging.debug ("Process with pid = %s does not exist", pid);
-            rkn = rknDaemon(settings.WORK_DIR+settings.RKN_PID)
+            rkn = rknDaemon(WORK_DIR,RKN_PID)
             rkn.start()
 
 def stop():
     try:
-        f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
+        f = open(WORK_DIR+RKN_PID, 'r');
     except Exception as e:
         logging.debug("Can't find pid file. Nothing to stop.");
         return 1;
@@ -79,9 +101,9 @@ def stop():
     try:
         os.kill(int(pid), signal.SIGKILL)
     except Exception as e:
-        os.remove(settings.WORK_DIR+settings.RKN_PID)
+        os.remove(WORK_DIR+RKN_PID)
     else:
-        os.remove(settings.WORK_DIR+settings.RKN_PID)
+        os.remove(WORK_DIR+RKN_PID)
 
 def restart():
     stop()
@@ -89,7 +111,7 @@ def restart():
 
 def status():
     try:
-        f = open(settings.WORK_DIR+settings.RKN_PID, 'r');
+        f = open(WORK_DIR+RKN_PID, 'r');
     except Exception as e:
         logging.debug("Can't find pid file. Nothing to stop.");
         print ("Daemon status: not running");

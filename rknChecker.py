@@ -8,35 +8,51 @@ from base64 import b64decode
 from lxml import etree as ET
 import logging
 import pytz
-#import mailnotify
-
-import settings
 
 
+OPERATOR_NAME  = "OPERATOR_NAME"
+OPERATOR_INN   = "OPERATOR_INN"
+OPERATOR_OGRN  = "OPERATOR_OGRN"
+OPERATOR_EMAIL = "OPERATOR_EMAIL"
+WORK_DIR       = "/var/"
+DOC_VERSION    = "0.0"
 
 class rknChecker:
     # TODO Create
     def __init__(self):
         logging.debug("Initialization instance of rknChecker")
-        self.OPERATOR_NAME = settings.OPERATOR_NAME
+        if (os.path.exists('settings/settings.py')):
+            init('settings')
+            self.OPERATOR_NAME  = settings.OPERATOR_NAME
+            self.OPERATOR_INN   = settings.OPERATOR_INN
+            self.OPERATOR_OGRN  = settings.OPERATOR_OGRN
+            self.OPERATOR_EMAIL = settings.OPERATOR_EMAIL
+            self.WORK_DIR       = settings.WORK_DIR
+            self.DOC_VERSION    = setting.DOC_VERSION
+        else:
+            logging.debug ('Can not find setting.py. Loading default')
+            self.OPERATOR_NAME  = OPERATOR_NAME
+            self.OPERATOR_INN   = OPERATOR_INN
+            self.OPERATOR_OGRN  = OPERATOR_OGRN
+            self.OPERATOR_EMAIL = OPERATOR_EMAIL
+            self.WORK_DIR       = WORK_DIR
+            self.DOC_VERSION    = DOC_VERSION
+
         logging.debug("Operator name is: %s", self.OPERATOR_NAME)
-        self.OPERATOR_INN  = settings.OPERATOR_INN
         logging.debug("Operator INN is: %s", self.OPERATOR_INN)
-        self.OPERATOR_OGRN = settings.OPERATOR_OGRN
         logging.debug("Operator OGRN is: %s", self.OPERATOR_OGRN)
-        self.OPERATOR_EMAIL = settings.OPERATOR_EMAIL
         logging.debug("Operator email is: %s", self.OPERATOR_EMAIL)
 
 
         try:
-            self.DIR = settings.WORK_DIR
+            self.DIR = WORK_DIR
         except AttributeError:
             # Logging about setting dir to current
             self.DIR = os.getcwd()
         logging.debug ("Path for request.xml is: %s", self.DIR);
         self.XML_FILE_NAME = self.DIR+"request.xml"
         self.P7S_FILE_NAME = self.DIR+"request.xml.sign"
-        self.DOC_VERSION   = settings.DOC_VERSION
+        self.DOC_VERSION   = self.DOC_VERSION
 
     def getDumpDate(self):
         try:
