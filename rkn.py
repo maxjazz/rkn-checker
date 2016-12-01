@@ -23,7 +23,7 @@ SETTINGS = {
 
 
 def init (filename):
-    loggihg.debug ('Load settings from file: %s', filename)
+    logging.debug ('Load settings from file: %s', filename)
     sys.path.append("settings")
     import filename
     SETTINGS['WORK_DIR'] = settings.WORK_DIR
