@@ -22,10 +22,10 @@ SETTINGS = {
 }
 
 
-def init (filename):
+def init ():
     logging.debug ('Load settings from file: %s', filename)
     sys.path.append("settings")
-    import filename
+    import settings
     SETTINGS['WORK_DIR'] = settings.WORK_DIR
     SETTINGS['RKN_PID']  = settings.RKN_PID
     SETTINGS['RKN_LOG']  = settings.RKN_LOG
@@ -39,7 +39,7 @@ def init (filename):
 
 
 if (os.path.exists('settings/settings.py')):
-    init('settings')
+    init()
 else:
     logging.debug ('Can not find setting.py. Loading default')
 
