@@ -23,7 +23,7 @@ SETTINGS = {
 
 
 def init ():
-    logging.debug ('Load settings from file: %s', filename)
+    logging.debug ('Load settings from file: settings/settings.py')
     sys.path.append("settings")
     import settings
     SETTINGS['WORK_DIR'] = settings.WORK_DIR
