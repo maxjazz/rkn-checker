@@ -18,9 +18,9 @@ def sec2hr(sec):
 
 class rknDaemon:
 
-    def __init__(self, workdir, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', refresh=15):
-        self.workdir = workdir
-        self.pidfile = workdir+pidfile
+    def __init__(self, settings, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', refresh=15):
+        self.workdir = settings['WORK_DIR']
+        self.pidfile = settings['WORK_DIR'] + settings['RKN_PID']
         self.stdin   = stdin
         self.stdout  = stdout
         self.stderr  = stderr

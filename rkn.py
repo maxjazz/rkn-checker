@@ -96,7 +96,7 @@ def start():
         f = open(SETTINGS['WORK_DIR']+SETTINGS['RKN_PID'], 'r')
     except Exception as e:
         logging.debug ("Error while open file: %s", e)
-        rkn = rknDaemon(SETTINGS['WORK_DIR'],SETTINGS['RKN_PID']) #TODO передавать полностью массив в качестве параметра
+        rkn = rknDaemon(SETTINGS) #TODO передавать полностью массив в качестве параметра
         rkn.start()
     else:
         pid = f.read();
@@ -104,7 +104,7 @@ def start():
             logging.debug ("RknDaemon is still running with pid = %s", pid);
         else:
             logging.debug ("Process with pid = %s does not exist", pid);
-            rkn = rknDaemon(SETTINGS['WORK_DIR'],SETTINGS['RKN_PID']) #TODO передавать полностью массив в качестве параметра
+            rkn = rknDaemon(SETTINGS) #TODO передавать полностью массив в качестве параметра
             rkn.start()
 
 def stop():
