@@ -10,33 +10,17 @@ import logging
 import pytz
 
 
-OPERATOR_NAME  = "OPERATOR_NAME"
-OPERATOR_INN   = "OPERATOR_INN"
-OPERATOR_OGRN  = "OPERATOR_OGRN"
-OPERATOR_EMAIL = "OPERATOR_EMAIL"
-WORK_DIR       = "/var/"
-DOC_VERSION    = "0.0"
 
 class rknChecker:
     # TODO Create
-    def __init__(self):
-        logging.debug("Initialization instance of rknChecker")
-        if (os.path.exists('settings/settings.py')):
-            init('settings')
-            self.OPERATOR_NAME  = settings.OPERATOR_NAME
-            self.OPERATOR_INN   = settings.OPERATOR_INN
-            self.OPERATOR_OGRN  = settings.OPERATOR_OGRN
-            self.OPERATOR_EMAIL = settings.OPERATOR_EMAIL
-            self.WORK_DIR       = settings.WORK_DIR
-            self.DOC_VERSION    = setting.DOC_VERSION
-        else:
-            logging.debug ('Can not find setting.py. Loading default')
-            self.OPERATOR_NAME  = OPERATOR_NAME
-            self.OPERATOR_INN   = OPERATOR_INN
-            self.OPERATOR_OGRN  = OPERATOR_OGRN
-            self.OPERATOR_EMAIL = OPERATOR_EMAIL
-            self.WORK_DIR       = WORK_DIR
-            self.DOC_VERSION    = DOC_VERSION
+    def __init__(self, settings):
+        self.OPERATOR_NAME  = settings['OPERATOR_NAME']
+        self.OPERATOR_INN   = settings['OPERATOR_INN']
+        self.OPERATOR_OGRN  = settings['OPERATOR_OGRN']
+        self.OPERATOR_EMAIL = settings['OPERATOR_EMAIL']
+        self.WORK_DIR       = settings['WORK_DIR']
+        self.DOC_VERSION    = setting['DOC_VERSION']
+
 
         logging.debug("Operator name is: %s", self.OPERATOR_NAME)
         logging.debug("Operator INN is: %s", self.OPERATOR_INN)

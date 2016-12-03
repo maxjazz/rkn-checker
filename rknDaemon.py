@@ -5,7 +5,7 @@ from rknRequestXml import rknRequestXML
 #from zapretinfo import ZapretInfo
 #from dump import DumpFile
 
-import settings
+#import settings
 import logging
 import os, sys, time
 
