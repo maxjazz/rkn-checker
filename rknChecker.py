@@ -19,7 +19,7 @@ class rknChecker:
         self.OPERATOR_OGRN  = settings['OPERATOR_OGRN']
         self.OPERATOR_EMAIL = settings['OPERATOR_EMAIL']
         self.WORK_DIR       = settings['WORK_DIR']
-        self.DOC_VERSION    = setting['DOC_VERSION']
+        self.DOC_VERSION    = settings['DOC_VERSION']
 
 
         logging.debug("Operator name is: %s", self.OPERATOR_NAME)
@@ -28,19 +28,15 @@ class rknChecker:
         logging.debug("Operator email is: %s", self.OPERATOR_EMAIL)
 
 
-        try:
-            self.DIR = WORK_DIR
-        except AttributeError:
-            # Logging about setting dir to current
-            self.DIR = os.getcwd()
-        logging.debug ("Path for request.xml is: %s", self.DIR);
-        self.XML_FILE_NAME = self.DIR+"request.xml"
-        self.P7S_FILE_NAME = self.DIR+"request.xml.sign"
+
+        logging.debug ("Path for request.xml is: %s", self.WORK_DIR);
+        self.XML_FILE_NAME = self.WORK_DIR+"request.xml"
+        self.P7S_FILE_NAME = self.WORK_DIR+"request.xml.sign"
         self.DOC_VERSION   = self.DOC_VERSION
 
     def getDumpDate(self):
         try:
-            et = ElementTree().parse(self.DIR + "dump.xml")
+            et = ElementTree().parse(self.WORK_DIR + "dump.xml")
         except IOError:
             logging.debug("Can't find dump.xml");
             return '1970-01-01T00:00:00'
