@@ -77,6 +77,10 @@ class rknDaemon:
         self.rknlog.debug("======== Daemonize succes =========")
         self.rknlog= logging.getLogger("rkn-%s" % str(os.getpid()))
         self.rknlog.debug ("Pidfile is: %s", self.pidfile);
+    def check(self):
+        return True;
+
+
     def run(self):
         checker = rknChecker(self.settings)
         logging.info ("Last dump have a time: %s", checker.getDumpDate());
@@ -152,4 +156,5 @@ class rknDaemon:
         self.rknlog.info("                      Starting daemon with pid: %s", str(os.getpid()) )
         self.rknlog.info("                      Working directory: %s", str(os.getcwd()) )
         self.rknlog.info("="*100 )
-        self.run()
+        if self.check():
+            self.run()
