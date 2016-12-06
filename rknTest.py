@@ -3,3 +3,6 @@
 class rknTest:
     def __init__(self, settings):
         pass
+
+    def openssl:
+        pass:
