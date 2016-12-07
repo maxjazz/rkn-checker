@@ -1,5 +1,4 @@
-1. Rewrite zapret-checker from Pavel Egorov for Licence Clearity
-
+1. Add rknWebService for working with RKN wsdl-service 
 
 2. Dump to git 
 >> Можете использовать за основу https://github.com/strizhechenko/rkn_utils/blob/master/dump_archive_to_git_repo.sh
