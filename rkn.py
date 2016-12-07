@@ -10,7 +10,7 @@ import psutil
 
 SETTINGS = {
     'WORK_DIR' : '/var/log/',
-    'RKN_LOG'  : 'rkn-message.log',
+    'RKN_LOG'  : '/var/log/rkn-message.log',
     'RKN_PID'  : 'rkn.pid',
     'OPERATOR_NAME' : "OPERATOR",
     'OPERATOR_INN'  : "12345678910",
@@ -59,10 +59,9 @@ from rknDaemon import rknDaemon
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%Y-%m-%d %H:%M:%S',
-                    filename=SETTINGS['WORK_DIR']+SETTINGS['RKN_LOG'],
+                    filename='/var/log/rkn.log',
                     filemode='a')
 
-logging.debug('test')
 
 
 
@@ -111,7 +110,7 @@ def start():
             logging.debug ("RknDaemon is still running with pid = %s", pid);
         else:
             logging.debug ("Process with pid = %s does not exist", pid);
-            rkn = rknDaemon(SETTINGS) 
+            rkn = rknDaemon(SETTINGS)
             rkn.start()
 
 def stop():

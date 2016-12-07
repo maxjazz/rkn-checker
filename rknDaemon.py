@@ -27,9 +27,12 @@ class rknDaemon:
         self.stdout  = stdout
         self.stderr  = stderr
         self.refresh = refresh
-        self.rknlog= logging.getLogger("rkn" )
-
-
+        self.rknlog = logging.getLogger('rkn')
+        logging.basicConfig(level=logging.DEBUG,
+                            format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                            datefmt='%Y-%m-%d %H:%M:%S',
+                            filename='/var/log/rkn.log',
+                            filemode='a')
 
     def daemonize(self):
         # first fork()
@@ -155,6 +158,7 @@ class rknDaemon:
 
     def start(self):
         self.daemonize()
+        self.rknlog = logging.getLogger("rkn-%s" % str(os.getpid()))
         self.rknlog.info("="*100 )
         self.rknlog.info("                      Starting daemon with pid: %s", str(os.getpid()) )
         self.rknlog.info("                      Working directory: %s", str(os.getcwd()) )
