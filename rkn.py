@@ -8,6 +8,15 @@ import argparse
 import psutil
 
 
+logging.basicConfig(level=logging.DEBUG,
+                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='/var/log/rkn.log',
+                    filemode='a')
+
+
+
+
 SETTINGS = {
     'WORK_DIR' : '/var/log/',
     'RKN_LOG'  : '/var/log/rkn-message.log',
@@ -53,16 +62,6 @@ else:
 
 
 from rknDaemon import rknDaemon
-
-
-
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    filename='/var/log/rkn.log',
-                    filemode='a')
-
-
 
 
 def isRunning(pid):
