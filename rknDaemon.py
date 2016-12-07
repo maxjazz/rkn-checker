@@ -1,6 +1,7 @@
 from xml.etree.ElementTree import ElementTree
 from rknChecker import rknChecker
 from rknRequestXml import rknRequestXML
+from rknTest import rknTest
 
 #from zapretinfo import ZapretInfo
 #from dump import DumpFile
@@ -77,7 +78,9 @@ class rknDaemon:
         self.rknlog.debug("======== Daemonize succes =========")
         self.rknlog= logging.getLogger("rkn-%s" % str(os.getpid()))
         self.rknlog.debug ("Pidfile is: %s", self.pidfile);
+
     def test(self):
+        rkntest = rknTest(self.settings);
         return True;
 
 

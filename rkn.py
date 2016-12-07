@@ -9,7 +9,7 @@ import psutil
 
 
 SETTINGS = {
-    'WORK_DIR' : '/var/',
+    'WORK_DIR' : '/var/log/',
     'RKN_LOG'  : 'rkn-message.log',
     'RKN_PID'  : 'rkn.pid',
     'OPERATOR_NAME' : "OPERATOR",
@@ -18,7 +18,10 @@ SETTINGS = {
     'OPERATOR_EMAIL' : "mail@operator.ru",
     'OPERATOR_TIMEZONE' : "UTC",
     'URL_API'           : 'http://vigruzki.rkn.gov.ru/services/OperatorRequest/?wsdl',
-    'DOC_VERSION'       : '2.1'
+    'DOC_VERSION'       : '2.1',
+    'OPENSSL'           : '/openssl-gost/bin',
+    'CERT'              : '/openssl-gost/cert'
+
 }
 
 
@@ -36,6 +39,9 @@ def init ():
     SETTINGS['OPERATOR_TIMEZONE'] = settings.OPERATOR_TIMEZONE
     SETTINGS['URL_API'] = settings.URL_API
     SETTINGS['DOC_VERSION'] = settings.DOC_VERSION
+    SETTINGS ['OPENSSL']    = settings.OPENSSL
+    SETTINGS ['CERT']    = settings.CERT
+
 
 
 
@@ -55,6 +61,7 @@ logging.basicConfig(level=logging.DEBUG,
                     datefmt='%Y-%m-%d %H:%M:%S',
                     filename=SETTINGS['WORK_DIR']+SETTINGS['RKN_LOG'],
                     filemode='a')
+print (SETTINGS['RKN_LOG'])
 
 
 
