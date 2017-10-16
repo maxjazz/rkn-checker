@@ -47,7 +47,8 @@ class rknRequestXML:
 		#, encoding="windows-1251", pretty_print=True, xml_declaration=True).replace("'",'"').replace('\n','\r\n');
 		logging.debug(requestText)
 
-		return str(requestText, 'windows-1251');
+		#return str(requestText, 'windows-1251');
+		return str(requestText);
 
 	def generate(self, filename):
 		text = self.generateText();

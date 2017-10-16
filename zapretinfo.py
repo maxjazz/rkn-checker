@@ -12,13 +12,13 @@ API_URL = "http://vigruzki.rkn.gov.ru/services/OperatorRequest/?wsdl"
 class ZapretInfo:
     def getLastDumpDateEx(self):
 	pass
-	#client = suds.client.Client(API_URL)
-	#result = client.service.getLastDumpDateEx()
-	#self.webServiceVersion = result['webServiceVersion']
-	#self.dumpFormatVersion = result['dumpFormatVersion']
-	#self.docVersion = result['docVersion']
-	#self.lastDumpDateUrgently = result['lastDumpDateUrgently']
-	#return self.lastDumpDateUrgently
+	client = suds.client.Client(API_URL)
+	result = client.service.getLastDumpDateEx()
+	self.webServiceVersion = result['webServiceVersion']
+	self.dumpFormatVersion = result['dumpFormatVersion']
+	self.docVersion = result['docVersion']
+	self.lastDumpDateUrgently = result['lastDumpDateUrgently']
+	return self.lastDumpDateUrgently
 
     def getDocVersion(self):
 	return self.docVersion

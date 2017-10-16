@@ -3,8 +3,8 @@ from rknChecker import rknChecker
 from rknRequestXml import rknRequestXML
 from rknTest import rknTest
 
-#from zapretinfo import ZapretInfo
-#from dump import DumpFile
+from zapretinfo import ZapretInfo
+from rknDump import rknDump
 
 #import settings
 import logging
@@ -93,34 +93,34 @@ class rknDaemon:
         request = rknRequestXML(checker.OPERATOR_NAME, checker.OPERATOR_INN, checker.OPERATOR_OGRN, checker.OPERATOR_EMAIL, 'Europe/Moscow' )
         request.generate(self.workdir+'request.xml');
         while True:
-            #rkndump           = ZapretInfo()
-            #DumpDate          = rkndump.getLastDumpDate() 	# Dump timestamp in msec
-            #DumpDateUrgently  = rkndump.getLastDumpDateEx() 	# Urgently Dump timestamp im msec
-            #WebServiceVersion = rkndump.getWebServiceVersion()  # Web-service string "X.Y"
-            #DumpFormatVersion = rkndump.getDumpFormatVersion()  # Dump format version string "X.Y"
-            #DocVersion        = rkndump.getDocVersion()         # Doc version string "X.Y"
+            rkndump           = ZapretInfo()
+            DumpDate          = rkndump.getLastDumpDate() 	# Dump timestamp in msec
+            DumpDateUrgently  = rkndump.getLastDumpDateEx() 	# Urgently Dump timestamp im msec
+            WebServiceVersion = rkndump.getWebServiceVersion()  # Web-service string "X.Y"
+            DumpFormatVersion = rkndump.getDumpFormatVersion()  # Dump format version string "X.Y"
+            DocVersion        = rkndump.getDocVersion()         # Doc version string "X.Y"
 
-            #localdump 	      = DumpFile(DIR);
-	    #LocalDumpDate     = localdump.getUpdateTime()
-	    #LocalDumpDateUrgently = localdump.getUpdateTimeUrgently()
+            localdump 	      = rknDump(self.workdir);
+	    LocalDumpDate     = localdump.getUpdateTime()
+	    LocalDumpDateUrgently = localdump.getUpdateTimeUrgently()
 
-	    #deltaDumpDate = DumpDate/1000 - LocalDumpDate
-	    #deltaDumpDateUrgently = DumpDateUrgently/1000 - LocalDumpDateUrgently
+	    deltaDumpDate = DumpDate/1000 - LocalDumpDate
+	    deltaDumpDateUrgently = DumpDateUrgently/1000 - LocalDumpDateUrgently
 
 
 
-            #self.rknlog.info("Dump date:\t\t%s [local: %s, deltas: %s ]"
-            #                       % (datetime.datetime.fromtimestamp(DumpDate/1000),
-            #                          datetime.datetime.fromtimestamp(LocalDumpDate),
-            #                          sec2hr(deltaDumpDate) ))
+            self.rknlog.info("Dump date:\t\t%s [local: %s, deltas: %s ]"
+                                   % (datetime.datetime.fromtimestamp(DumpDate/1000),
+                                      datetime.datetime.fromtimestamp(LocalDumpDate),
+                                      sec2hr(deltaDumpDate) ))
 
-            #self.rknlog.info("Dump date urgently:\t%s [local: %s, deltas: %s  ]"
-            #                       % (datetime.datetime.fromtimestamp(DumpDateUrgently/1000),
-            #                          datetime.datetime.fromtimestamp(LocalDumpDateUrgently),
-            #                          sec2hr(deltaDumpDateUrgently) ))
-            #self.rknlog.info("Web Service Version:\t\t%s [local: %s]" % (WebServiceVersion, localdump.getWebServiceVersion()))
-            #self.rknlog.info("Dump Format Version:\t\t%s [local: %s]" % (DumpFormatVersion, localdump.getDumpFormatVersion()))
-            #self.rknlog.info("Operator's Doc Version:\t%s [local: %s]" % (DocVersion, localdump.getDocVersion()) )
+            self.rknlog.info("Dump date urgently:\t%s [local: %s, deltas: %s  ]"
+                                   % (datetime.datetime.fromtimestamp(DumpDateUrgently/1000),
+                                      datetime.datetime.fromtimestamp(LocalDumpDateUrgently),
+                                      sec2hr(deltaDumpDateUrgently) ))
+            self.rknlog.info("Web Service Version:\t\t%s [local: %s]" % (WebServiceVersion, localdump.getWebServiceVersion()))
+            self.rknlog.info("Dump Format Version:\t\t%s [local: %s]" % (DumpFormatVersion, localdump.getDumpFormatVersion()))
+            self.rknlog.info("Operator's Doc Version:\t%s [local: %s]" % (DocVersion, localdump.getDocVersion()) )
 
     	#if (deltaDumpDateUrgently <> 0):
             self.rknlog.info("Need urgently update")

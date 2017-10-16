@@ -10,23 +10,26 @@ import settings
 
 class rknDump:
 
-    def __init__(self, dir):
-	self.dir=dir;
+    def __init__(self, directory):
+	self.directory=directory;
+	self.updateTime = ""
+	self.updateTimeUrgently =  ""
     try:
-        DumpFile=ElementTree().parse(self.dir+"/dump.xml")
+        DumpFile=ElementTree().parse("/opt/revizor/dump.xml")
     except:
-        print ("help")
-        ;
+        print ("Could not parses %s /dump.xml" % self.directory)
     else:
-        self.updateTime = DumpFile.attrib['updateTime']
-        self.updateTimeUrgently = DumpFile.attrib['updateTimeUrgently']
+        updateTime = DumpFile.attrib['updateTime']
+        updateTimeUrgently = DumpFile.attrib['updateTimeUrgently']
 
 
     def getUpdateTime(self):
-	return int(time.mktime(datetime.datetime.strptime(self.updateTime[:19],'%Y-%m-%dT%H:%M:%S').timetuple()))
+	print (self.updateTime)
+	#return int(time.mktime(datetime.datetime.strptime(self.updateTime[:19],'%Y-%m-%dT%H:%M:%S').timetuple()))
 
     def getUpdateTimeUrgently(self):
-	return int(time.mktime(datetime.datetime.strptime(self.updateTimeUrgently[:19],'%Y-%m-%dT%H:%M:%S').timetuple()))
+	print (self.updateTimeUrgently)
+	#return int(time.mktime(datetime.datetime.strptime(self.updateTimeUrgently[:19],'%Y-%m-%dT%H:%M:%S').timetuple()))
 
 
 
