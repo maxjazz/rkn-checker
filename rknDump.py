@@ -15,12 +15,13 @@ class rknDump:
 	self.updateTime = ""
 	self.updateTimeUrgently =  ""
     try:
-        DumpFile=ElementTree().parse("/opt/revizor/dump.xml")
+        DumpFile=ElementTree().parse("/var/log/dump.xml")
     except:
-        print ("Could not parses %s /dump.xml" % self.directory)
+        print ("Could not parses %s /dump.xml" % directory)
     else:
-        updateTime = DumpFile.attrib['updateTime']
-        updateTimeUrgently = DumpFile.attrib['updateTimeUrgently']
+	pass
+	#self.updateTime = DumpFile.attrib['updateTime']
+	#self.updateTimeUrgently = DumpFile.attrib['updateTimeUrgently']
 
 
     def getUpdateTime(self):
