@@ -1,8 +1,5 @@
-1. Add rknWebService for working with RKN wsdl-service 
-   using zeep library
-
-2. Add exceptions
-3. Add test
+1. Try...catch blocks
+2. Teste
 
 
 
