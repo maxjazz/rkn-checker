@@ -1,5 +1,8 @@
 1. Add rknWebService for working with RKN wsdl-service 
+   using zeep library
 
-2. Dump to git 
->> Можете использовать за основу https://github.com/strizhechenko/rkn_utils/blob/master/dump_archive_to_git_repo.sh
+2. Add exceptions
+3. Add test
+
+
 
